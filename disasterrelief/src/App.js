@@ -14,8 +14,9 @@ export default class Home extends React.Component {
           <Container style={{color: 'white', paddingTop: '3rem'}}>
             <h3>Welcome</h3>
             <br/>
-            <p>This is a website to help determine an estimate cost to repair an area suffering from a given natural disaster.  We used a combination of React, GCP, MongoDB, and possibly AI from Azure.
-            <br/>Click around to learn more.
+            <p>The purpose of this website is to show our disaster recover and relief estimator.  It uses a combination of React, GCP, MonogoDB,
+               and possibly Azure in the future.
+            <br/>
             <br/></p>
           </Container>
         </div>
