@@ -1,20 +1,22 @@
-import { Jumbotron, Container, Card, Button, CardImg, CardTitle, CardText,
-        CardHeader, CardDeck, CardColumns, CardSubtitle, CardBody,
-        Form, FormGroup, Label, Input, FormText, Color } from 'reactstrap';
-import { BrowserRouter as Router, Route, Link , Switch,BrowserHistory } from 'react-router-dom';
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import GoogleMapReact from 'google-map-react';
+import React, {Component} from 'react';
 
-class Marker extends Component {
+const Map = ({ key, coordinates }) => {
+  return (
+    <GoogleMapReact
+      bootstrapURLKeys={{ key }}
+      defaultCenter={{lat: coordinates[0], lng: coordinates[1]}}
+      defaultZoom={15}>
+      <Marker lat={coordinates[0]} lng={coordinates[1]} />
+    </GoogleMapReact>
+  )
+}
 
-    render(){
-    return (
-      <div className="marker"
-        style={{ backgroundColor: 'red', cursor: 'pointer'}}
-        title={'MARKER'}
-      />
-    );
-  }
-};
+const Marker = props => {
+  return <>
+    <div className="pin"></div>
+    <div className="pulse"></div>
+  </>
+}
 
-  export default Marker;
+export { Map, Marker };

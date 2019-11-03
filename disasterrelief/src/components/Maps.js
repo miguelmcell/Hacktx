@@ -3,8 +3,10 @@ import { Jumbotron, Container, Card, Button, CardImg, CardTitle, CardText,
         Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { BrowserRouter as Router, Route, Link , Switch,BrowserHistory } from 'react-router-dom';
 import React, { Component } from 'react';
+import {Marker, Map} from './Marker.js';
+import './Marker.css';
 import ReactDOM from 'react-dom';
-import GoogleMapReact, {Marker} from 'google-map-react';
+import GoogleMapReact from 'google-map-react';
 import Geocode from "react-geocode";
 // import Marker from './Marker.js'
 Geocode.setApiKey("AIzaSyB3ZebS_qbJIYPHUCz9pYZPVTFwJ2j2zZc");
@@ -31,7 +33,9 @@ class SimpleMap extends Component {
     this.getState = this.getState.bind(this);
     this.state = {
 			stateName: '',
-      intro: 'Please select a state to search'
+      intro: 'Please select a state to search',
+      lat: 39.31794050576279,
+      lng: -100.94481055798371
 		};
   }
   getState(lat, long) {
@@ -107,11 +111,10 @@ class SimpleMap extends Component {
             console.log(states[address]);
             this.setState(state => ({
 	              stateName: states[address],
-                intro: ''
+                intro: '',
+                lat: lat,
+                lng: long
             }));
-            // axios.get('http://api.github.com/users/maecapozzi')
-            //   .then(response => this.setState({username: response.data.name}))
-            // }
           }
         }
         else{
@@ -144,8 +147,11 @@ class SimpleMap extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
+        <Marker lat={this.state.lat} lng={this.state.lng} />
         </GoogleMapReact>
+        <p class="display-2" style={{fontSize: '20px',color:'black',textAlign: 'center'}}>
         {this.state.intro}
+        </p>
         <p class="display-2" style={{fontSize: '40px',textAlign: 'center'}}>
         {this.state.stateName}
         </p>
