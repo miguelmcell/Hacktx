@@ -7,9 +7,11 @@ COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
 RUN apt-get install -y libmysqlclient-dev python-dev
+RUN apt-get install python-dnspython
 RUN pip install -r requirements.txt
 
 COPY . /app
+
 
 ENTRYPOINT [ "python" ]
 

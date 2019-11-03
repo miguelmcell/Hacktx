@@ -29,6 +29,10 @@ class SimpleMap extends Component {
   constructor(props) {
     super(props);
     this.getState = this.getState.bind(this);
+    this.state = {
+			stateName: '',
+      intro: 'Please select a state to search'
+		};
   }
   getState(lat, long) {
     let states = {
@@ -101,6 +105,13 @@ class SimpleMap extends Component {
           }
           else{
             console.log(states[address]);
+            this.setState(state => ({
+	              stateName: states[address],
+                intro: ''
+            }));
+            // axios.get('http://api.github.com/users/maecapozzi')
+            //   .then(response => this.setState({username: response.data.name}))
+            // }
           }
         }
         else{
@@ -123,18 +134,10 @@ class SimpleMap extends Component {
     zoom: 5
   };
 
-  // onMarkerClick = (marker, lat, lng) =>
-  //   this.setState({
-  //     activeMarker: marker,
-  //     lat:console.log(lat),
-  //     lng:console.log(lng)
-  // });
-  // _onClick = ({x, y, lat, lng, event}) => console.log(x, y, lat, lng, event);
-
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '100vh', width: '100%' }}>
+      <div style={{ height: '100%', width: '100%' }}>
         <GoogleMapReact
           onClick={({x, y, lat, lng, event}) => {this.getState(lat,lng)} }
           bootstrapURLKeys={{ key: 'AIzaSyB3ZebS_qbJIYPHUCz9pYZPVTFwJ2j2zZc' }}
@@ -142,6 +145,11 @@ class SimpleMap extends Component {
           defaultZoom={this.props.zoom}
         >
         </GoogleMapReact>
+        {this.state.intro}
+        <p class="display-2" style={{fontSize: '40px',textAlign: 'center'}}>
+        {this.state.stateName}
+        </p>
+        <button type="button" class="btn btn-light" style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto'}}>Search</button>
       </div>
     );
   }
