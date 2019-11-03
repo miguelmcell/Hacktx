@@ -5,6 +5,7 @@ import { Jumbotron, Container, Card, Button, CardImg, CardTitle, CardText,
         Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { BrowserRouter as Router, Route, Link , Switch,BrowserHistory } from 'react-router-dom';
 import SimpleMap from './components/Maps.js'
+// import Marker from './components/Marker.js'
 
 export default class Home extends React.Component {
   render (){

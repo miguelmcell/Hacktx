@@ -4,7 +4,8 @@ import { Jumbotron, Container, Card, Button, CardImg, CardTitle, CardText,
 import { BrowserRouter as Router, Route, Link , Switch,BrowserHistory } from 'react-router-dom';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import GoogleMapReact from 'google-map-react';
+import GoogleMapReact, {Marker} from 'google-map-react';
+// import Marker from './Marker.js'
 
 const AnyReactComponent = ({ text }) => (
   <div style={{
@@ -23,28 +24,35 @@ const AnyReactComponent = ({ text }) => (
 );
 
 class SimpleMap extends Component {
+  state = {
+    activeMarker: {},          //Shows the active marker upon click
+  };
   static defaultProps = {
     center: {
-      lat: 59.95,
+      lat: 60.95,
       lng: 30.33
     },
     zoom: 11
   };
+
+  // onMarkerClick = (marker, lat, lng) =>
+  //   this.setState({
+  //     activeMarker: marker,
+  //     lat:console.log(lat),
+  //     lng:console.log(lng)
+  // });
+  // _onClick = ({x, y, lat, lng, event}) => console.log(x, y, lat, lng, event);
 
   render() {
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
+          onClick={({x, y, lat, lng, event}) => console.log(x, y, lat, lng, event)}
           bootstrapURLKeys={{ key: 'AIzaSyB3ZebS_qbJIYPHUCz9pYZPVTFwJ2j2zZc' }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-          <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
-            text="My Marker"
-          />
         </GoogleMapReact>
       </div>
     );
