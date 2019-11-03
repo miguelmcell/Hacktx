@@ -1,6 +1,4 @@
-import { Jumbotron, Container, Card, Button, CardImg, CardTitle, CardText,
-        CardHeader, CardDeck, CardColumns, CardSubtitle, CardBody,
-        Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import  'reactstrap';
 import { BrowserRouter as Router, Route, Link , Switch,BrowserHistory } from 'react-router-dom';
 import React, { Component } from 'react';
 import {Marker, Map} from './Marker.js';
@@ -31,6 +29,7 @@ class SimpleMap extends Component {
   constructor(props) {
     super(props);
     this.getState = this.getState.bind(this);
+    this.getInformation = this.getInformation.bind(this);
     this.state = {
 			stateName: '',
       intro: 'Please select a state to search',
@@ -38,6 +37,29 @@ class SimpleMap extends Component {
       lng: -100.94481055798371
 		};
   }
+  getInformation(){
+    // type
+    // &keyword=cruise
+    const axios = require('axios').default;
+    // let url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='
+    // url += this.state.lat + ',' + this.state.lng + '&radius=1500&type=' + '&key=AIzaSyBg4GQQdNSceQbeOmVi5hpbYlAi7FIQvJc';
+    let url = 'http://disasterinfo.tk/v1/findstate/' + this.state.stateName;
+    console.log(url);
+    axios.get(url)
+    .then(function (response) {
+      // handle success
+      console.log(response);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
+
+  }
+
   getState(lat, long) {
     let states = {
         'AK': 'Alaska',
@@ -155,7 +177,7 @@ class SimpleMap extends Component {
         <p class="display-2" style={{fontSize: '40px',textAlign: 'center'}}>
         {this.state.stateName}
         </p>
-        <button type="button" class="btn btn-light" style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto'}}>Search</button>
+        <button type="button" onClick={this.getInformation} class="btn btn-light" style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto'}}>Search</button>
       </div>
     );
   }

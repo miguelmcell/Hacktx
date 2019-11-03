@@ -12,7 +12,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(
   <div>
     <div style={{marginTop: '1%', width: '50%', height: '500px', display: 'block', marginLeft: 'auto', marginRight: 'auto'}}>
-      <h1 class="display-4" style={{fontFamily: 'Gill Sans', fontWeight: 'bold',textAlign: 'center',width: '20%', display: 'block', marginLeft: 'auto', marginRight: 'auto'}}>
+      <h1 style={{fontFamily: 'Gill Sans', fontWeight: 'bold',textAlign: 'center',width: '20%', display: 'block', marginLeft: 'auto', marginRight: 'auto'}}>
         Disaster Info
       </h1>
       <SimpleMap/>
